@@ -1,0 +1,12 @@
+inf 0.2334 0.2268 inf inf 0.1864 inf 0.2664 0.4724 inf inf inf
+0.2334 inf 0.4584 inf inf 0.0752 inf 0.2614 0.2927 inf inf 0.4367
+0.2268 0.4584 inf inf inf 0.4126 inf 0.3977 inf inf inf inf
+inf inf inf inf 0.1180 inf inf inf 0.5708 0.1838 0.1367 inf
+inf inf inf 0.1180 inf inf inf inf 0.5340 0.1903 0.2249 inf
+0.1864 0.0752 0.4126 inf inf inf inf 0.2941 0.2941 inf inf 0.5119
+inf inf inf inf inf inf inf inf 0.5374 inf inf inf
+0.2664 0.2614 0.3977 inf inf 0.2941 inf inf 0.5509 inf inf 0.4262
+0.4724 0.2927 inf 0.5708 0.5340 0.2941 0.5374 0.5509 inf 0.3900 0.5109 0.5568
+inf inf inf 0.1838 0.1903 inf inf inf 0.3900 inf 0.1400 inf
+inf inf inf 0.1367 0.2249 inf inf inf 0.5109 0.1400 inf inf
+inf 0.4367 inf inf inf 0.5119 inf 0.4262 0.5568 inf inf inf

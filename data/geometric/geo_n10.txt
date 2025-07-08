@@ -1,0 +1,10 @@
+inf inf 0.3407 inf inf inf inf 0.5932 0.2756 inf
+inf inf 0.5412 0.4357 inf 0.2110 inf 0.2250 0.4653 0.2862
+0.3407 0.5412 inf inf 0.3565 inf 0.5720 0.4990 0.2331 inf
+inf 0.4357 inf inf inf 0.5241 0.3152 inf inf inf
+inf inf 0.3565 inf inf inf 0.4549 inf 0.5889 inf
+inf 0.2110 inf 0.5241 inf inf inf 0.3638 inf 0.3332
+inf inf 0.5720 0.3152 0.4549 inf inf inf inf inf
+0.5932 0.2250 0.4990 inf inf 0.3638 inf inf 0.3333 0.1465
+0.2756 0.4653 0.2331 inf 0.5889 inf inf 0.3333 inf 0.4659
+inf 0.2862 inf inf inf 0.3332 inf 0.1465 0.4659 inf

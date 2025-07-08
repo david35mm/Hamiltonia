@@ -1,0 +1,12 @@
+inf inf inf inf 2.0000 inf inf inf inf inf inf 80.0000
+inf inf 57.0000 inf inf inf inf 66.0000 inf inf inf inf
+inf 57.0000 inf 8.0000 inf inf inf inf inf inf inf inf
+inf inf 8.0000 inf inf inf inf inf inf inf inf 78.0000
+2.0000 inf inf inf inf inf inf inf inf 93.0000 25.0000 inf
+inf inf inf inf inf inf inf inf inf inf inf 31.0000
+inf inf inf inf inf inf inf inf inf inf inf 49.0000
+inf 66.0000 inf inf inf inf inf inf inf inf inf inf
+inf inf inf inf inf inf inf inf inf inf inf inf
+inf inf inf inf 93.0000 inf inf inf inf inf 71.0000 inf
+inf inf inf inf 25.0000 inf inf inf inf 71.0000 inf 36.0000
+80.0000 inf inf 78.0000 inf 31.0000 49.0000 inf inf inf 36.0000 inf

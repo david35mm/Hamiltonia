@@ -1,0 +1,5 @@
+inf inf inf inf inf
+inf inf inf inf 60.0000
+inf inf inf inf inf
+inf inf inf inf 21.0000
+inf 60.0000 inf 21.0000 inf

@@ -1,0 +1,16 @@
+inf inf inf inf inf inf inf inf inf 39.0000 inf inf inf inf 29.0000 inf
+inf inf inf inf inf inf 59.0000 inf inf inf inf inf inf 64.0000 inf inf
+inf inf inf inf inf 11.0000 inf inf inf inf 39.0000 inf inf 62.0000 inf 63.0000
+inf inf inf inf 61.0000 inf 79.0000 84.0000 19.0000 inf inf inf 6.0000 inf inf inf
+inf inf inf 61.0000 inf inf inf inf inf inf inf 12.0000 inf inf inf 15.0000
+inf inf 11.0000 inf inf inf inf 98.0000 inf inf inf inf inf inf inf 83.0000
+inf 59.0000 inf 79.0000 inf inf inf 50.0000 inf inf inf inf inf 91.0000 86.0000 inf
+inf inf inf 84.0000 inf 98.0000 50.0000 inf inf inf inf 81.0000 15.0000 inf 52.0000 inf
+inf inf inf 19.0000 inf inf inf inf inf inf inf inf inf 86.0000 inf 53.0000
+39.0000 inf inf inf inf inf inf inf inf inf inf inf 39.0000 inf inf inf
+inf inf 39.0000 inf inf inf inf inf inf inf inf inf inf inf inf inf
+inf inf inf inf 12.0000 inf inf 81.0000 inf inf inf inf inf inf 71.0000 81.0000
+inf inf inf 6.0000 inf inf inf 15.0000 inf 39.0000 inf inf inf inf 85.0000 inf
+inf 64.0000 62.0000 inf inf inf 91.0000 inf 86.0000 inf inf inf inf inf inf inf
+29.0000 inf inf inf inf inf 86.0000 52.0000 inf inf inf 71.0000 85.0000 inf inf inf
+inf inf 63.0000 inf 15.0000 83.0000 inf inf 53.0000 inf inf 81.0000 inf inf inf inf

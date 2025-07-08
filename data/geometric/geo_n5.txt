@@ -1,0 +1,5 @@
+inf 0.0503 0.3716 inf inf
+0.0503 inf 0.4166 inf inf
+0.3716 0.4166 inf 0.2928 0.4653
+inf inf 0.2928 inf 0.5740
+inf inf 0.4653 0.5740 inf

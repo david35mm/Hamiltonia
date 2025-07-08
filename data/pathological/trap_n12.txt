@@ -1,0 +1,12 @@
+inf 100.0000 inf inf inf inf 10.0000 inf inf inf inf 100.0000
+100.0000 inf 100.0000 inf inf inf 5000.0000 inf inf inf inf inf
+inf 100.0000 inf 100.0000 inf inf 5000.0000 inf inf inf inf inf
+inf inf 100.0000 inf 100.0000 inf 5000.0000 inf inf inf inf inf
+inf inf inf 100.0000 inf 100.0000 5000.0000 inf inf inf inf inf
+inf inf inf inf 100.0000 inf 100.0000 inf inf inf inf inf
+10.0000 5000.0000 5000.0000 5000.0000 5000.0000 100.0000 5000.0000 100.0000 5000.0000 5000.0000 5000.0000 5000.0000
+inf inf inf inf inf inf 100.0000 inf 100.0000 inf inf inf
+inf inf inf inf inf inf 5000.0000 100.0000 inf 100.0000 inf inf
+inf inf inf inf inf inf 5000.0000 inf 100.0000 inf 100.0000 inf
+inf inf inf inf inf inf 5000.0000 inf inf 100.0000 inf 100.0000
+100.0000 inf inf inf inf inf 5000.0000 inf inf inf 100.0000 inf
