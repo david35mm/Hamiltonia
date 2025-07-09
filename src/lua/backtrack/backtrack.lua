@@ -1,4 +1,4 @@
-local decorators = require("src.lua.utils.decorators")
+local decorators = require('src.lua.utils.decorators')
 
 local INF = math.huge
 
@@ -10,7 +10,7 @@ local function hamiltonian_backtracking(graph, counter)
     path[i] = -1
     visited[i] = false
   end
-  path[1] = 1  -- índices Lua empiezan en 1
+  path[1] = 1 -- índices Lua empiezan en 1
   visited[1] = true
 
   local function solve(pos)

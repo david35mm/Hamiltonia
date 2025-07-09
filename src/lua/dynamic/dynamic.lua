@@ -1,4 +1,4 @@
-local decorators = require("src.lua.utils.decorators")
+local decorators = require('src.lua.utils.decorators')
 
 local INF = math.huge
 
@@ -13,7 +13,7 @@ local function hamiltonian_dp(graph, counter)
       dp[mask][i] = INF
     end
   end
-  dp[1][1] = 0  -- iniciar desde el nodo 1 (índice 1 en Lua)
+  dp[1][1] = 0 -- iniciar desde el nodo 1 (índice 1 en Lua)
 
   for mask = 1, (1 << n) - 1 do
     for i = 1, n do
@@ -37,7 +37,7 @@ local function hamiltonian_dp(graph, counter)
   local final_mask = (1 << n) - 1
   local min_cost = INF
   local last_vertex = -1
-  for i = 2, n do  -- terminamos en cualquier nodo distinto de 1
+  for i = 2, n do -- terminamos en cualquier nodo distinto de 1
     if dp[final_mask][i] ~= INF and graph[i][1] ~= INF then
       local cost = dp[final_mask][i] + graph[i][1]
       if cost < min_cost then

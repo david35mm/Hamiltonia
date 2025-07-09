@@ -1,4 +1,4 @@
-local decorators = require("src.lua.utils.decorators")
+local decorators = require('src.lua.utils.decorators')
 
 local INF = math.huge
 
