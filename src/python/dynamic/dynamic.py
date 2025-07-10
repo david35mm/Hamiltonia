@@ -1,4 +1,5 @@
 from src.python.utils.decorators import count_dp_ops
+from src.python.utils.decorators import measure_memory
 from src.python.utils.decorators import time_it
 
 INF = float('inf')
@@ -6,6 +7,7 @@ INF = float('inf')
 
 @time_it
 @count_dp_ops
+@measure_memory
 def hamiltonian_dp(graph, counter=None):
   n = len(graph)
   if n == 0:
