@@ -1,5 +1,6 @@
 import functools
 import time
+import tracemalloc
 
 INF = float('inf')
 
@@ -55,6 +56,21 @@ def count_nn_ops(func):
     kwargs['counter'] = counter
     result = func(*args, **kwargs)
     print(f"  -> Comparaciones de distancia: {counter[0]:,}")
+    return result
+
+  return wrapper
+
+
+# Decorador de memoria RAM
+def measure_memory(func):
+
+  @functools.wraps(func)
+  def wrapper(*args, **kwargs):
+    tracemalloc.start()
+    result = func(*args, **kwargs)
+    current, peak = tracemalloc.get_traced_memory()
+    tracemalloc.stop()
+    print(f"  -> Memoria pico usada: {peak / 1024:.2f} KB")
     return result
 
   return wrapper
