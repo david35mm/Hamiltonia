@@ -12,7 +12,7 @@ def load_graph_txt(filepath, inf_value=float('inf')):
   return matrix
 
 
-# Para ejecutar el archivo directamente desde la terminal
+# Para ejecutar el archivo directamente desde la terminal (OPCIONAL)
 if __name__ == '__main__':
   from pprint import pprint
   import sys
