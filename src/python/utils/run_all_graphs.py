@@ -1,5 +1,4 @@
 import os
-import tracemalloc
 
 from src.python.backtrack.backtrack import hamiltonian_backtracking
 from src.python.dynamic.dynamic import hamiltonian_dp
@@ -22,10 +21,7 @@ def run_algorithms_on_file(filepath):
 
   def run_and_print(algorithm_func, label):
     print(f"\n[{label}]")
-    tracemalloc.start()
     path, cost = algorithm_func(graph)
-    current, peak = tracemalloc.get_traced_memory()
-    tracemalloc.stop()
     if path:
       print(f"  -> Ruta encontrada: {' -> '.join(map(str, path))}")
       if cost == INF:
@@ -34,7 +30,6 @@ def run_algorithms_on_file(filepath):
         print(f"  -> Costo del circuito: {cost:.2f}")
     else:
       print("  -> No se encontró un circuito hamiltoniano.")
-    print(f"  -> Memoria pico usada: {peak / 1024:.2f} KB")
     print("-" * 40)
 
   run_and_print(hamiltonian_backtracking, "Backtracking")
