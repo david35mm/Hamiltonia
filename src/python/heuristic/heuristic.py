@@ -1,4 +1,4 @@
-from src.python.utils.decorators import count_nn_ops
+from src.python.utils.decorators import count_ops
 from src.python.utils.decorators import measure_memory
 from src.python.utils.decorators import time_it
 
@@ -6,9 +6,9 @@ INF = float('inf')
 
 
 @time_it
-@count_nn_ops
+@count_ops
 @measure_memory
-def hamiltonian_nearest_neighbor(graph, counter=None):
+def hamiltonian_nearest_neighbor(graph, context, counter=None):
   n = len(graph)
   if n == 0:
     return (None, INF)

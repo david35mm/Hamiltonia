@@ -1,4 +1,4 @@
-from src.python.utils.decorators import count_backtracking_ops
+from src.python.utils.decorators import count_ops
 from src.python.utils.decorators import measure_memory
 from src.python.utils.decorators import time_it
 
@@ -6,9 +6,9 @@ INF = float('inf')
 
 
 @time_it
-@count_backtracking_ops
+@count_ops
 @measure_memory
-def hamiltonian_backtracking(graph, counter=None):
+def hamiltonian_backtracking(graph, context, counter=None):
   n = len(graph)
   path = [-1] * n
   visited = [False] * n
