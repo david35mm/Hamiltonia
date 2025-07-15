@@ -3,6 +3,7 @@ import networkx as nx
 from src.python.backtrack.backtrack import hamiltonian_backtracking
 from src.python.dynamic.dynamic import hamiltonian_dp
 from src.python.heuristic.heuristic import hamiltonian_nearest_neighbor
+from src.python.utils.decorators import ExecutionContext
 
 INF = float('inf')
 
@@ -31,12 +32,19 @@ def run_experiment_on_graph(G, title='Experimento de Circuito Hamiltoniano'):
   adj_matrix = nx.to_numpy_array(G, weight='weight', nonedge=INF).tolist()
 
   def process_and_print(algorithm_func):
-    path, cost = algorithm_func(adj_matrix)
+    context = ExecutionContext()
+    path, cost = algorithm_func(adj_matrix, context=context)
+    print(f'--- Ejecutando función: {algorithm_func.__name__} ---')
     if path:
       print(f'  -> Ruta encontrada: {' -> '.join(map(str, path))}')
       print(f'  -> Costo del circuito: {cost if cost != INF else 'N/A'}')
     else:
       print('  -> No se encontró un circuito hamiltoniano en el grafo.')
+
+    # Mostrar métricas del contexto
+    print(f'  -> Tiempo: {context.time_seconds:.4f}s')
+    print(f'  -> Memoria máxima: {context.memory_peak_kb:.2f} KB')
+    print(f'  -> Operaciones: {context.ops_count:,}')
     print('-' * 40)
 
   # --- Ejecutar cada algoritmo ---
