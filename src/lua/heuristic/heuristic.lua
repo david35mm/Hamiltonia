@@ -2,9 +2,11 @@ local decorators = require('src.lua.utils.decorators')
 
 local INF = math.huge
 
-local function hamiltonian_nearest_neighbor(graph, counter)
+local function hamiltonian_nearest_neighbor(graph, context)
   local n = #graph
-  if n == 0 then return nil, INF end
+  if n == 0 then
+    return nil, INF
+  end
 
   local start_node = 1
   local path = {start_node}
@@ -17,12 +19,12 @@ local function hamiltonian_nearest_neighbor(graph, counter)
     local nearest_neighbor = -1
     local min_dist = INF
     for neighbor = 1, n do
-      if not visited[neighbor] then
-        if counter then counter[1] = counter[1] + 1 end
-        if graph[current_node][neighbor] < min_dist then
-          min_dist = graph[current_node][neighbor]
-          nearest_neighbor = neighbor
+      if not visited[neighbor] and graph[current_node][neighbor] < min_dist then
+        if context and context._internal_counter then
+          context._internal_counter[1] = context._internal_counter[1] + 1
         end
+        min_dist = graph[current_node][neighbor]
+        nearest_neighbor = neighbor
       end
     end
 
@@ -36,7 +38,7 @@ local function hamiltonian_nearest_neighbor(graph, counter)
     current_node = nearest_neighbor
   end
 
-  local final_edge_cost = graph[path[#path]][start_node]
+  local final_edge_cost = graph[current_node][start_node]
   if final_edge_cost == INF then
     return nil, INF
   end
@@ -47,8 +49,11 @@ local function hamiltonian_nearest_neighbor(graph, counter)
   return path, cost
 end
 
--- Aplicar decoradores
+-- Aplicar decoradores en orden: count → memory → time
 hamiltonian_nearest_neighbor = decorators.time_it(
-    decorators.count_nn_ops(hamiltonian_nearest_neighbor))
+  decorators.measure_memory(
+    decorators.count_ops(hamiltonian_nearest_neighbor)
+  )
+)
 
 return hamiltonian_nearest_neighbor

@@ -2,30 +2,36 @@ local decorators = require('src.lua.utils.decorators')
 
 local INF = math.huge
 
-local function hamiltonian_dp(graph, counter)
+local function hamiltonian_dp(graph, context)
   local n = #graph
-  if n == 0 then return nil, INF end
+  if n == 0 then
+    return nil, INF
+  end
 
+  local size = 2 ^ n
   local dp = {}
-  for mask = 1, (1 << n) do
+  for mask = 0, size - 1 do
     dp[mask] = {}
     for i = 1, n do
       dp[mask][i] = INF
     end
   end
-  dp[1][1] = 0 -- iniciar desde el nodo 1 (índice 1 en Lua)
+  dp[1][1] = 0 -- Empezamos en el nodo 1
 
-  for mask = 1, (1 << n) - 1 do
+  for mask = 1, size - 1 do
     for i = 1, n do
       if (mask & (1 << (i - 1))) ~= 0 then
         for j = 1, n do
           if i ~= j and (mask & (1 << (j - 1))) ~= 0 then
-            if counter then counter[1] = counter[1] + 1 end
+            if context and context._internal_counter then
+              context._internal_counter[1] = context._internal_counter[1] + 1
+            end
+
             local prev_mask = mask ~ (1 << (i - 1))
             if dp[prev_mask][j] ~= INF and graph[j][i] ~= INF then
-              local cost = dp[prev_mask][j] + graph[j][i]
-              if cost < dp[mask][i] then
-                dp[mask][i] = cost
+              local new_cost = dp[prev_mask][j] + graph[j][i]
+              if new_cost < dp[mask][i] then
+                dp[mask][i] = new_cost
               end
             end
           end
@@ -34,10 +40,11 @@ local function hamiltonian_dp(graph, counter)
     end
   end
 
-  local final_mask = (1 << n) - 1
+  local final_mask = size - 1
   local min_cost = INF
   local last_vertex = -1
-  for i = 2, n do -- terminamos en cualquier nodo distinto de 1
+
+  for i = 2, n do
     if dp[final_mask][i] ~= INF and graph[i][1] ~= INF then
       local cost = dp[final_mask][i] + graph[i][1]
       if cost < min_cost then
@@ -47,17 +54,25 @@ local function hamiltonian_dp(graph, counter)
     end
   end
 
-  if last_vertex == -1 then return nil, INF end
+  if last_vertex == -1 then
+    return nil, INF
+  end
 
-  -- reconstruir camino
+  -- Reconstruir el camino
   local path = {}
+  for i = 1, n + 1 do path[i] = 0 end
+  path[n + 1] = 1
+  path[1] = 1
   local current_mask = final_mask
   local current_vertex = last_vertex
+
   for i = n, 2, -1 do
     path[i] = current_vertex
     local prev_mask = current_mask ~ (1 << (current_vertex - 1))
     for j = 1, n do
-      if (prev_mask & (1 << (j - 1))) ~= 0 and dp[prev_mask][j] ~= INF and graph[j][current_vertex] ~= INF then
+      if (prev_mask & (1 << (j - 1))) ~= 0 and
+          dp[prev_mask][j] ~= INF and
+          graph[j][current_vertex] ~= INF then
         local expected = dp[prev_mask][j] + graph[j][current_vertex]
         if math.abs(dp[current_mask][current_vertex] - expected) < 1e-9 then
           current_vertex = j
@@ -67,14 +82,15 @@ local function hamiltonian_dp(graph, counter)
       end
     end
   end
-  path[1] = 1
-  path[n + 1] = 1
 
   return path, min_cost
 end
 
--- Aplicar decoradores
+-- Aplicar decoradores en orden: count → memory → time
 hamiltonian_dp = decorators.time_it(
-    decorators.count_dp_ops(hamiltonian_dp))
+  decorators.measure_memory(
+    decorators.count_ops(hamiltonian_dp)
+  )
+)
 
 return hamiltonian_dp
