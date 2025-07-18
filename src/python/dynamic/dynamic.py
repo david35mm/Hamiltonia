@@ -6,8 +6,8 @@ INF = float('inf')
 
 
 @time_it
-@count_ops
 @measure_memory
+@count_ops
 def hamiltonian_dp(graph, context, counter=None):
   n = len(graph)
   if n == 0:

@@ -6,8 +6,8 @@ INF = float('inf')
 
 
 @time_it
-@count_ops
 @measure_memory
+@count_ops
 def hamiltonian_backtracking(graph, context, counter=None):
   n = len(graph)
   path = [-1] * n
