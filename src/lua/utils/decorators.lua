@@ -1,48 +1,70 @@
 local decorators = {}
 
+-- Contexto de ejecución similar al de Python
+function decorators.new_execution_context()
+  return {
+    time_seconds = 0.0,
+    memory_peak_kb = 0.0,
+    ops_count = 0,
+  }
+end
+
+
 -- Decorador de tiempo
 function decorators.time_it(func)
-  return function(...)
-    print(string.format('--- Ejecutando %s ---', tostring(func)))
+  return function(matrix, context)
     local start_time = os.clock()
-    local result = {func(...)}
+    local result = {func(matrix, context)}
     local end_time = os.clock()
     local duration = end_time - start_time
-    print(string.format('  -> Tiempo de ejecución: %.6f segundos.', duration))
+
+    if context then
+      context.time_seconds = duration
+    end
+
     return table.unpack(result)
   end
 end
 
 
--- Decoradores de conteo específicos
-function decorators.count_backtracking_ops(func)
-  return function(matrix, counter)
-    counter = counter or {0}
-    local result = {func(matrix, counter)}
-    print(string.format('  -> Intentos de extensión de camino: %d', counter[1]))
+-- Decorador genérico de conteo de operaciones
+function decorators.count_ops(func)
+  return function(matrix, context)
+    context = context or {}
+    context._internal_counter = {0}
+    local result = {func(matrix, context)}
+    context.ops_count = context._internal_counter[1]
     return table.unpack(result)
   end
 end
 
 
-function decorators.count_dp_ops(func)
-  return function(matrix, counter)
-    counter = counter or {0}
-    local result = {func(matrix, counter)}
-    print(string.format('  -> Actualizaciones de la tabla DP: %d', counter[1]))
+-- Decorador de memoria RAM
+function decorators.measure_memory(func)
+  return function(matrix, context)
+    collectgarbage('collect')
+    local before = collectgarbage('count') -- KB
+    collectgarbage('stop')                 -- opcional
+
+    local result = {func(matrix, context)}
+
+    collectgarbage('restart') -- solo si se usó el "stop" del GC
+    collectgarbage('collect')
+    local after = collectgarbage('count')
+    local peak = math.max(before, after)
+
+    if context then
+      context.memory_peak_kb = peak
+    end
+
     return table.unpack(result)
   end
 end
 
 
-function decorators.count_nn_ops(func)
-  return function(matrix, counter)
-    counter = counter or {0}
-    local result = {func(matrix, counter)}
-    print(string.format('  -> Comparaciones de distancia: %d', counter[1]))
-    return table.unpack(result)
-  end
-end
-
-
-return decorators
+return {
+  time_it = decorators.time_it,
+  count_ops = decorators.count_ops,
+  measure_memory = decorators.measure_memory,
+  new_execution_context = decorators.new_execution_context,
+}
