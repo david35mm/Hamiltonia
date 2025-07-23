@@ -31,6 +31,8 @@ Se generaron grafos de prueba de diferentes tamaños, incluyendo el **Juego Icó
 - Identificación de puntos de cruce (cuando un enfoque supera a otro)
 - Recomendaciones de uso según el tamaño y tipo de grafo
 
+El análisis de resultados se encuentra [aquí](docs/benchmark_analysis.ipynb).
+
 ---
 
 ## Créditos
