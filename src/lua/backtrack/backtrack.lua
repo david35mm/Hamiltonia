@@ -6,6 +6,8 @@ local function hamiltonian_backtracking(graph, context)
   local n = #graph
   local path = {}
   local visited = {}
+  local best_cost = INF
+  local best_path = {}
 
   for i = 1, n do
     path[i] = -1
@@ -15,12 +17,19 @@ local function hamiltonian_backtracking(graph, context)
   path[1] = 1
   visited[1] = true
 
-  local function solve(pos)
+  local function solve(pos, current_cost)
     if pos > n then
-      if context and context._internal_counter then
-        context._internal_counter[1] = context._internal_counter[1] + 1
+      local last_leg = graph[path[n]][path[1]]
+      if last_leg ~= INF then
+        local total_cost = current_cost + last_leg
+        if total_cost < best_cost then
+          best_cost = total_cost
+          for i = 1, n do
+            best_path[i] = path[i]
+          end
+        end
       end
-      return graph[path[n]][path[1]] ~= INF
+      return
     end
 
     for v = 1, n do
@@ -32,30 +41,23 @@ local function hamiltonian_backtracking(graph, context)
       if graph[last_vertex][v] ~= INF and not visited[v] then
         path[pos] = v
         visited[v] = true
-        if solve(pos + 1) then
-          return true
-        end
+        solve(pos + 1, current_cost + graph[last_vertex][v])
         visited[v] = false
         path[pos] = -1
       end
     end
-
-    return false
   end
 
-  if solve(2) then
+  solve(2, 0)
+
+  if best_cost < INF then
     local final_path = {}
     for i = 1, n do
-      final_path[i] = path[i]
+      final_path[i] = best_path[i]
     end
-    final_path[n + 1] = path[1]
+    final_path[n + 1] = best_path[1]
 
-    local cost = 0
-    for i = 1, n do
-      cost = cost + graph[final_path[i]][final_path[i + 1]]
-    end
-
-    return final_path, cost
+    return final_path, best_cost
   else
     return nil, INF
   end
