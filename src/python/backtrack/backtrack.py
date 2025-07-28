@@ -10,38 +10,45 @@ INF = float('inf')
 @count_ops
 def hamiltonian_backtracking(graph, context, counter=None):
   n = len(graph)
-  path = [-1] * n
+  if n == 0:
+    return (None, INF)
+
+  best_path = []
+  best_cost = INF
+
   visited = [False] * n
-  best_cost = [INF]
-  best_path = [None]
-
-  path[0] = 0
   visited[0] = True
+  current_path = [0]
+  current_cost = 0
 
-  def solve(pos, current_cost):
-    if pos == n:
-      last_leg = graph[path[pos - 1]][path[0]]
-      if last_leg != INF:
-        total_cost = current_cost + last_leg
-        if total_cost < best_cost[0]:
-          best_cost[0] = total_cost
-          best_path[0] = path[:]
+  def backtrack(path, cost, visited_nodes):
+    nonlocal best_path, best_cost
+    if len(path) == n:
+      last_node = path[-1]
+      if graph[last_node][0] != INF:
+        total_cost = cost + graph[last_node][0]
+        if counter:
+          counter[0] += 1  # Contar la operación de suma
+        if total_cost < best_cost:
+          if counter:
+            counter[0] += 1  # Contar la comparación
+          best_cost = total_cost
+          best_path = path[:] + [0]
       return
 
-    for v in range(n):
-      if counter:
-        counter[0] += 1
-      last_vertex = path[pos - 1]
-      if graph[last_vertex][v] != INF and not visited[v]:
-        visited[v] = True
-        path[pos] = v
-        solve(pos + 1, current_cost + graph[last_vertex][v])
-        visited[v] = False
-        path[pos] = -1
+    for next_node in range(n):
+      if not visited_nodes[next_node] and graph[path[-1]][next_node] != INF:
+        if counter:
+          counter[0] += 1  # Contar la operación de suma
+        new_cost = cost + graph[path[-1]][next_node]
+        visited_nodes[next_node] = True
+        path.append(next_node)
+        backtrack(path, new_cost, visited_nodes)
+        path.pop()
+        visited_nodes[next_node] = False
 
-  solve(1, 0)
+  backtrack(current_path, current_cost, visited)
 
-  if best_path[0] is not None:
-    final_path = best_path[0] + [best_path[0][0]]
-    return (final_path, best_cost[0])
-  return (None, INF)
+  if best_cost == INF:
+    return (None, INF)
+  return (best_path, best_cost)
